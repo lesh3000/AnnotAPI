@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            var par= {"path":"~/Documents/pdfannot.pdf"};
+           
+            $.ajax({
+                url: "http://localhost:52092/api/WebApplicationAnnotController/GetImages",
+                type: "POST",
+                contentType: "application/json",
+                data:JSON.stringify (par),
+                success: function (data) {
+                   var ar= JSON.parse(data);
+                   ar.forEach(function(entry){
+                    
+                    var image = new Image();
+image.src = 'data:image/jpeg;base64,'+entry.Image;
+
+document.body.appendChild(image);
+                   });
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+  
+</body>
+
+</html>
